@@ -32,7 +32,6 @@ function Sidebar({ showSidebar, closeSidebar, isDesktop }) {
         <h4 className="mb-4">Menu</h4>
 
         <div className="list-group">
-
           {/* Dashboard */}
           <Link
             to="/"
@@ -93,6 +92,17 @@ function Sidebar({ showSidebar, closeSidebar, isDesktop }) {
             Income History
           </Link>
 
+          {/* Loan Tracker */}
+          <Link
+            to="/loans"
+            onClick={closeSidebar}
+            className={`list-group-item list-group-item-action ${
+              location.pathname === "/loans" ? "active" : ""
+            }`}
+          >
+            <i className="bi bi-cash-stack me-2"></i>
+            Loan Tracker
+          </Link>
         </div>
       </div>
     </>

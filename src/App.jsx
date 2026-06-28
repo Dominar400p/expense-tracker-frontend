@@ -5,6 +5,8 @@ import AddExpense from "./pages/AddExpense";
 import Transactions from "./pages/Transactions";
 import ExpenseDetails from "./pages/ExpenseDetails";
 import EditExpense from "./pages/EditExpense";
+import LoanDashboard from "./pages/LoanDashboard";
+import AddLoan from "./pages/AddLoan";
 
 import AddIncome from "./pages/AddIncome";
 import IncomeHistory from "./pages/IncomeHistory";
@@ -14,6 +16,7 @@ import MonthlyChart from "./components/MonthlyChart";
 import CategoryChart from "./components/CategoryChart";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import LoanDetails from "./pages/LoanDetails";
 
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -23,7 +26,6 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <BrowserRouter>
-
       {/* Global Toast Notifications */}
       <ToastContainer
         position="top-right"
@@ -37,7 +39,6 @@ function App() {
       />
 
       <Routes>
-
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -146,6 +147,32 @@ function App() {
           }
         />
 
+        <Route
+          path="/loans"
+          element={
+            <PrivateRoute>
+              <LoanDashboard />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/loan/:loanId"
+          element={
+            <PrivateRoute>
+              <LoanDetails />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/add-loan"
+          element={
+            <PrivateRoute>
+              <AddLoan />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
