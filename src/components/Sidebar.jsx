@@ -92,7 +92,7 @@ function Sidebar({ showSidebar, closeSidebar, isDesktop }) {
             Income History
           </Link>
 
-          {/* Loan Tracker */}
+          {/* Loan Tracker
           <Link
             to="/loans"
             onClick={closeSidebar}
@@ -102,6 +102,19 @@ function Sidebar({ showSidebar, closeSidebar, isDesktop }) {
           >
             <i className="bi bi-cash-stack me-2"></i>
             Loan Tracker
+          </Link> */}
+
+          {/* Ledger */}
+
+          <Link
+            to="/ledger"
+            onClick={closeSidebar}
+            className={`list-group-item list-group-item-action ${
+              location.pathname === "/ledger" ? "active" : ""
+            }`}
+          >
+            <i className="bi bi-journal-bookmark me-2"></i>
+            Ledger
           </Link>
         </div>
       </div>

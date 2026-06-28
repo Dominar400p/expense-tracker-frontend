@@ -5,8 +5,10 @@ import AddExpense from "./pages/AddExpense";
 import Transactions from "./pages/Transactions";
 import ExpenseDetails from "./pages/ExpenseDetails";
 import EditExpense from "./pages/EditExpense";
-import LoanDashboard from "./pages/LoanDashboard";
-import AddLoan from "./pages/AddLoan";
+
+import LedgerDashboard from "./pages/LedgerDashboard";
+import AddBorrower from "./pages/AddBorrower";
+import LedgerDetails from "./pages/LedgerDetails";
 
 import AddIncome from "./pages/AddIncome";
 import IncomeHistory from "./pages/IncomeHistory";
@@ -16,7 +18,6 @@ import MonthlyChart from "./components/MonthlyChart";
 import CategoryChart from "./components/CategoryChart";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import LoanDetails from "./pages/LoanDetails";
 
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -147,29 +148,31 @@ function App() {
           }
         />
 
+        {/* Ledger */}
+
         <Route
-          path="/loans"
+          path="/ledger"
           element={
             <PrivateRoute>
-              <LoanDashboard />
+              <LedgerDashboard />
             </PrivateRoute>
           }
         />
 
         <Route
-          path="/loan/:loanId"
+          path="/add-borrower"
           element={
             <PrivateRoute>
-              <LoanDetails />
+              <AddBorrower />
             </PrivateRoute>
           }
         />
 
         <Route
-          path="/add-loan"
+          path="/ledger/:borrowerId"
           element={
             <PrivateRoute>
-              <AddLoan />
+              <LedgerDetails />
             </PrivateRoute>
           }
         />

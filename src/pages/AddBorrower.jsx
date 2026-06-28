@@ -6,16 +6,12 @@ import api from "../services/api";
 
 import { toast } from "react-toastify";
 
-function AddLoan() {
+function AddBorrower() {
   const navigate = useNavigate();
-
-  const today = new Date().toISOString().split("T")[0];
 
   const [form, setForm] = useState({
     personName: "",
     mobile: "",
-    loanAmount: "",
-    loanDate: today,
   });
 
   const [loading, setLoading] = useState(false);
@@ -27,41 +23,27 @@ function AddLoan() {
     });
   };
 
-  const validate = () => {
-    if (!form.personName.trim()) return "Enter person name";
-    if (!form.mobile.trim()) return "Enter mobile number";
-    if (!form.loanAmount || Number(form.loanAmount) <= 0)
-      return "Enter valid loan amount";
-    if (!form.loanDate) return "Select loan date";
-
-    return null;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const error = validate();
-
-    if (error) {
-      toast.error(error);
+    if (!form.personName.trim()) {
+      toast.error("Enter person name");
       return;
     }
 
     try {
       setLoading(true);
 
-      await api.post("/addLoan", {
+      await api.post("/addBorrower", {
         personName: form.personName.trim(),
         mobile: form.mobile.trim(),
-        loanAmount: Number(form.loanAmount),
-        loanDate: form.loanDate,
       });
 
-      toast.success("Loan Added Successfully");
+      toast.success("Borrower Added Successfully");
 
-      navigate("/loans");
+      navigate("/ledger");
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Unable to add loan.");
+      toast.error(err?.response?.data?.message || "Unable to add borrower.");
     } finally {
       setLoading(false);
     }
@@ -71,13 +53,10 @@ function AddLoan() {
     <Layout>
       <div className="container-fluid">
         <div className="row justify-content-center">
-          <div className="col-lg-7">
+          <div className="col-lg-6">
             <div className="card shadow">
               <div className="card-header bg-primary text-white">
-                <h3 className="mb-0">
-                  <i className="bi bi-cash-stack me-2"></i>
-                  Add Loan
-                </h3>
+                <h3 className="mb-0">Add Borrower</h3>
               </div>
 
               <div className="card-body">
@@ -93,7 +72,7 @@ function AddLoan() {
                     />
                   </div>
 
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <label className="form-label">Mobile Number</label>
                     <input
                       type="text"
@@ -104,41 +83,19 @@ function AddLoan() {
                     />
                   </div>
 
-                  <div className="mb-3">
-                    <label className="form-label">Loan Amount</label>
-                    <input
-                      type="number"
-                      name="loanAmount"
-                      className="form-control"
-                      value={form.loanAmount}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="mb-4">
-                    <label className="form-label">Loan Date</label>
-                    <input
-                      type="date"
-                      name="loanDate"
-                      className="form-control"
-                      value={form.loanDate}
-                      onChange={handleChange}
-                    />
-                  </div>
-
                   <div className="d-flex gap-2">
                     <button
                       type="submit"
                       className="btn btn-primary"
                       disabled={loading}
                     >
-                      {loading ? "Saving..." : "Add Loan"}
+                      {loading ? "Saving..." : "Save Borrower"}
                     </button>
 
                     <button
                       type="button"
                       className="btn btn-secondary"
-                      onClick={() => navigate("/loans")}
+                      onClick={() => navigate("/ledger")}
                     >
                       Cancel
                     </button>
@@ -153,4 +110,4 @@ function AddLoan() {
   );
 }
 
-export default AddLoan;
+export default AddBorrower;
